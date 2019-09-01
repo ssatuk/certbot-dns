@@ -9,7 +9,8 @@
     dest: /etc/letsencrypt/key_files/google-{{ domain_group.key }}.json
     mode: 0600
 
-- set_fact:
+- name: Set command to variable
+  set_fact:
     certbot_command:
        sudo certbot certonly --dns-google
           --dns-google-credentials /etc/letsencrypt/key_files/google-{{ domain_group.key }}.json

@@ -9,7 +9,8 @@
     dest: /etc/letsencrypt/key_files/digitalocean-{{ domain_group.key }}.ini
     mode: 0600
 
-- set_fact:
+- name: Set command to variable
+  set_fact:
     certbot_command:
        sudo certbot certonly --dns-digitalocean
           --dns-digitalocean-credentials /etc/letsencrypt/key_files/digitalocean-{{ domain_group.key }}.ini
