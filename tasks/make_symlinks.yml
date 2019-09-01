@@ -1,0 +1,16 @@
+- name: Create directories for ssl sites
+  file:
+    path: /etc/ssl/{{ domain_group.key }}
+    state: directory
+
+- name: Make symlinks to certbot certificates
+  file:
+    src: /etc/letsencrypt/live/{{ domain_group.key }}/fullchain.pem
+    dest: /etc/ssl/{{ domain_group.key }}/{{ domain_group.key }}.crt
+    state: link
+
+- name: Make symlinks to certbot certificate keys
+  file:
+    src: /etc/letsencrypt/live/{{ domain_group.key }}/privkey.pem
+    dest: /etc/ssl/{{ domain_group.key }}/{{ domain_group.key }}.key
+    state: link

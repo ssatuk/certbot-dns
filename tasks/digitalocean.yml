@@ -1,0 +1,20 @@
+- name: Install digitalocean certbot module
+  pip:
+    executable: /usr/bin/pip3
+    name: certbot-dns-digitalocean
+
+- name: Install digitalocean config for {{ domain_group.key }}
+  copy:
+    content: "dns_digitalocean_token = {{ domain_group.value.access_key }}\n"
+    dest: /etc/letsencrypt/key_files/digitalocean-{{ domain_group.key }}.ini
+    mode: 0600
+
+- set_fact:
+    certbot_command:
+       sudo certbot certonly --dns-digitalocean
+          --dns-digitalocean-credentials /etc/letsencrypt/key_files/digitalocean-{{ domain_group.key }}.ini
+          --dns-digitalocean-propagation-seconds 120 --non-interactive --agree-tos --email {{ letsencrypt.email }}
+          --cert-name {{ domain_group.key }} --domains {{ domain_group.value.domains|join(",") }}
+
+- name: Run command
+  include_tasks: run_command.yml
