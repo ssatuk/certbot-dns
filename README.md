@@ -1,38 +1,51 @@
-Certbot DNS
-=========
+# Certbot DNS
 
-A brief description of the role goes here.
+Make certificates with certbot and DNS challenge (DigitalOcean and GCP).
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Latest Ubuntu or Debian.  
+Tested with Ansible `2.7` and `2.8`.
 
-Role Variables
---------------
+## Usage
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+If you use DigitalOcean DNS service, create an API token in
+[DigitalOcean](https://cloud.digitalocean.com/account/api/tokens)  
+That's all. Just look at `vars` section in the example playbook.
 
-Dependencies
-------------
+If you want to use Google Cloud Platform,
+[obtain the service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).  
+Save it as `files/google/my_key.json` in your ansible project.
+Your `access_key` should look like this: `access_key: my_key.json`.
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Do not forget to install this role using Ansible Galaxy:
 
-Example Playbook
-----------------
+    ansible-galaxy install dmitryromanenko.certbot_dns
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+## Example Playbook
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+- hosts: localhost
+  remote_user: root
+  become: yes
+  become_method: sudo
+  vars:
+    letsencrypt:
+      email: your.email@example.com  # your email for accepting terms of service
+      linux_user: root               # this user will contain cron jobs for refreshing
+      link_to_ssl: yes               # link certificates to /etc/ssl from /etc/letsencrypt?
+      domain_groups:
+        example:                     # name of subdirectory with certificate and key
+          type: digitalocean         # `digitalocean` or `google`
+          access_key: your_token     # token for digitalocean, file name for google
+          scheduled: yes             # add entry to cron to refresh the certificates?
+          domains:
+            - 'example.com'          # add any number domains to certificate
+            - '*.example.com'        # also you can add wildcards
+  roles:
+    - dmitryromanenko.certbot_dns
+```
 
-License
--------
+## License
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Apache-2.0
