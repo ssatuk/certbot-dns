@@ -27,6 +27,6 @@
 - name: Create directories and symlinks for ssl sites
   include_tasks: make_symlinks.yml
   with_dict: '{{ letsencrypt.domain_groups }}'
-  when: copy_to_ssl | default(true)
+  when: link_to_ssl | default(true)
   loop_control:
     loop_var: domain_group

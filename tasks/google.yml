@@ -5,15 +5,15 @@
 
 - name: Install google config for {{ domain_group.key }}
   copy:
-    src: google/{{ domain_group.key }}.ini.j2
-    dest: /etc/letsencrypt/key_files/google-{{ domain_group.key }}.json
+    src: google/{{ domain_group.key }}
+    dest: /etc/letsencrypt/key_files/google-{{ domain_group.key }}
     mode: 0600
 
 - name: Set command to variable
   set_fact:
     certbot_command:
        sudo certbot certonly --dns-google
-          --dns-google-credentials /etc/letsencrypt/key_files/google-{{ domain_group.key }}.json
+          --dns-google-credentials /etc/letsencrypt/key_files/google-{{ domain_group.key }}
           --dns-google-propagation-seconds 120 --non-interactive --agree-tos --email {{ letsencrypt.email }}
           --cert-name {{ domain_group.key }} --domains {{ domain_group.value.domains|join(",") }}
 
