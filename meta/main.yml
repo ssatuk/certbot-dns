@@ -1,6 +1,8 @@
 galaxy_info:
   author: Dmitry Romanenko
-  description: Make certificates with certbot and DNS challenge (DigitalOcean and GCP)
+  description:
+    Make certificates with certbot and DNS challenge (DigitalOcean and Google Cloud Platform).
+    Easy configuration with one dictionary.
   license: Apache-2.0
   min_ansible_version: 2.7
   platforms:
