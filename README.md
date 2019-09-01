@@ -7,8 +7,7 @@ View this role on [Ansible Galaxy](https://galaxy.ansible.com/dmitryromanenko/ce
 
 ## Usage
 
-If you use DigitalOcean DNS service, create an API token in
-[DigitalOcean](https://cloud.digitalocean.com/account/api/tokens)  
+If you use DigitalOcean DNS service, [create an API token](https://cloud.digitalocean.com/account/api/tokens)  
 That's all. Just look at `vars` section in the example playbook.
 
 If you want to use Google Cloud Platform,
@@ -38,7 +37,7 @@ Do not forget to install this role using Ansible Galaxy:
           access_key: your_token     # token for digitalocean, file name for google
           scheduled: yes             # add entry to cron to refresh the certificates?
           domains:
-            - 'example.com'          # add any number domains to certificate
+            - 'example.com'          # add any number of domains to certificate
             - '*.example.com'        # also you can add wildcards
   roles:
     - dmitryromanenko.certbot_dns
