@@ -12,5 +12,6 @@
     hour: '2'
     day: '*/2'
     job: '{{ certbot_command }} | sudo tee -a /var/log/letsencrypt/cron.log 2>&1'
+  become: yes
   become_user: '{{ letsencrypt.linux_user | default("root") }}'
   when: domain_group.value.scheduled | default(false)
