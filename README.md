@@ -1,11 +1,9 @@
 # Certbot DNS
 
-Make certificates with certbot and DNS challenge (DigitalOcean and GCP).
+Make certificates with certbot and DNS challenge (DigitalOcean and Google Cloud Platform).
+Easy configuration with one dictionary.
 
-## Requirements
-
-Latest Ubuntu or Debian.  
-Tested with Ansible `2.7` and `2.8`.
+View this role on [Ansible Galaxy](https://galaxy.ansible.com/dmitryromanenko/certbot_dns)
 
 ## Usage
 
@@ -45,6 +43,11 @@ Do not forget to install this role using Ansible Galaxy:
   roles:
     - dmitryromanenko.certbot_dns
 ```
+
+## Requirements
+
+Latest Ubuntu or Debian.  
+Tested with Ansible `2.7` and `2.8`.
 
 ## License
 
