@@ -15,7 +15,10 @@
        sudo certbot certonly --dns-google
           --dns-google-credentials /etc/letsencrypt/key_files/google-{{ domain_group.key }}
           --dns-google-propagation-seconds 120 --non-interactive --agree-tos --email {{ letsencrypt.email }}
-          --cert-name {{ domain_group.key }} --domains {{ domain_group.value.domains|join(",") }}
+          --cert-name {{ domain_group.key }} --domains '{{ domain_group.value.domains|join(",") }}'
+          {% if letsencrypt.post_scripts| default([]) %}
+            --post-hook '{{ letsencrypt.post_scripts|join("&&") }}'
+          {% endif %}
 
 - name: Run command
   include_tasks: run_command.yml

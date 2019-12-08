@@ -28,17 +28,19 @@ Do not forget to install this role using Ansible Galaxy:
   become_method: sudo
   vars:
     letsencrypt:
-      email: your.email@example.com  # your email for accepting terms of service
-      linux_user: root               # this user will contain cron jobs for refreshing
-      link_to_ssl: yes               # link certificates to /etc/ssl from /etc/letsencrypt?
+      email: your.email@example.com    # your email for accepting terms of service
+      linux_user: root                 # this user will contain cron jobs for refreshing
+      link_to_ssl: yes                 # link certificates to /etc/ssl from /etc/letsencrypt?
       domain_groups:
-        example:                     # name of subdirectory with certificate and key
-          type: digitalocean         # `digitalocean` or `google`
-          access_key: your_token     # token for digitalocean, file name for google
-          scheduled: yes             # add entry to cron to refresh the certificates?
+        example:                       # name of subdirectory with certificate and key
+          type: digitalocean           # `digitalocean` or `google`
+          access_key: your_token       # token for digitalocean, file name for google
+          scheduled: yes               # add entry to cron to refresh the certificates?
           domains:
-            - 'example.com'          # add any number of domains to certificate
-            - '*.example.com'        # also you can add wildcards
+            - 'example.com'            # add any number of domains to certificate
+            - '*.example.com'          # also you can add wildcards
+      post_scripts:                    # list of commands to execute after certbot
+        - sudo systemctl restart nginx
   roles:
     - dmitryromanenko.certbot_dns
 ```
