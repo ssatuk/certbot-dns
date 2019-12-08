@@ -15,7 +15,10 @@
         sudo certbot certonly --dns-digitalocean
           --dns-digitalocean-credentials /etc/letsencrypt/key_files/digitalocean-{{ domain_group.key }}.ini
           --dns-digitalocean-propagation-seconds 120 --non-interactive --agree-tos --email {{ letsencrypt.email }}
-          --cert-name {{ domain_group.key }} --domains {{ domain_group.value.domains|join(",") }}
+          --cert-name {{ domain_group.key }} --domains '{{ domain_group.value.domains|join(",") }}'
+          {% if letsencrypt.post_scripts| default([]) %}
+            --post-hook '{{ letsencrypt.post_scripts|join("&&") }}'
+          {% endif %}
 
 - name: Run command
   include_tasks: run_command.yml
