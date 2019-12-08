@@ -12,7 +12,7 @@
 - name: Set command to variable
   set_fact:
     certbot_command:
-       sudo certbot certonly --dns-digitalocean
+        sudo certbot certonly --dns-digitalocean
           --dns-digitalocean-credentials /etc/letsencrypt/key_files/digitalocean-{{ domain_group.key }}.ini
           --dns-digitalocean-propagation-seconds 120 --non-interactive --agree-tos --email {{ letsencrypt.email }}
           --cert-name {{ domain_group.key }} --domains {{ domain_group.value.domains|join(",") }}

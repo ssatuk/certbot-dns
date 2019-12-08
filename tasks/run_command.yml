@@ -5,9 +5,9 @@
   register: command_result
   changed_when: (command_result.rc == 0) and ("no action taken" not in command_result.stdout)
 
-- name: Run certbot with Google DNS plugin in cron for {{ domain_group.key }}
+- name: Run certbot in cron for {{ domain_group.key }}
   cron:
-    name: run certbot with Google DNS plugin for {{ domain_group.key }}
+    name: run certbot for {{ domain_group.key }}
     minute: '0'
     hour: '2'
     day: '*/2'
