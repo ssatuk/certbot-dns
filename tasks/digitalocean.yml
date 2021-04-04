@@ -1,7 +1,8 @@
 - name: Install digitalocean certbot module
-  pip:
-    executable: /usr/bin/pip3
-    name: certbot-dns-digitalocean
+  apt:
+    name: python3-certbot-dns-digitalocean
+    update_cache: yes
+    cache_valid_time: 3600
 
 - name: Install digitalocean config for {{ domain_group.key }}
   copy:

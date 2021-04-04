@@ -4,14 +4,11 @@ galaxy_info:
     Make certificates with certbot and DNS challenge (DigitalOcean and Google Cloud Platform).
     Easy configuration with one dictionary.
   license: Apache-2.0
-  min_ansible_version: 2.7
+  min_ansible_version: 2.9
   platforms:
     - name: Ubuntu
       versions:
-        - bionic
-    - name: Debian
-      versions:
-        - stretch
+        - focal
   galaxy_tags:
     - certbot
     - letsencrypt

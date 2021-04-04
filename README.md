@@ -47,8 +47,10 @@ Do not forget to install this role using Ansible Galaxy:
 
 ## Requirements
 
-Latest Ubuntu or Debian.  
-Tested with Ansible `2.7` and `2.8`.
+Latest Ubuntu.  
+Tested with Ansible `2.9`.
+
+Use version `1.1.0` for Ubuntu `bionic` and Debian `stretch`.
 
 ## License
 
