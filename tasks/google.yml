@@ -1,7 +1,8 @@
 - name: Install google certbot module
-  pip:
-    executable: /usr/bin/pip3
-    name: certbot-dns-google
+  apt:
+    name: python3-certbot-dns-google
+    update_cache: yes
+    cache_valid_time: 3600
 
 - name: Install google config for {{ domain_group.key }}
   copy:
